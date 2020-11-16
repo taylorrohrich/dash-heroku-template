@@ -259,114 +259,116 @@ gss_clean['education_category']
 
 # In[91]:
 
-# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-# ALLOWED_TYPES = (
-#     "text", "number", "password", "email", "search",
-#     "tel", "url", "range", "hidden",
-# )
-# app.layout = html.Div(
-#     [
-#         html.H1("Exploring the Gender Wage Gap by Job Prestige"),
-#         html.H2("Taylor Rohrich (trr2as)"),
-#         html.Div(
-#             html.Img(src="https://static01.nyt.com/images/2014/11/15/business/money/money-articleLarge.jpg?quality=75&auto=webp&disable=upscale"),
-#             style=({"display": 'flex', 'justify-content': 'center', 'align-items': 'center'})),
-#         dcc.Markdown(children=markdown_text),
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+ALLOWED_TYPES = (
+    "text", "number", "password", "email", "search",
+    "tel", "url", "range", "hidden",
+)
+app.layout = html.Div(
+    [
+        html.H1("Exploring the Gender Wage Gap by Job Prestige"),
+        html.H2("Taylor Rohrich (trr2as)"),
+        html.Div(
+            html.Img(src="https://static01.nyt.com/images/2014/11/15/business/money/money-articleLarge.jpg?quality=75&auto=webp&disable=upscale"),
+            style=({"display": 'flex', 'justify-content': 'center', 'align-items': 'center'})),
+        dcc.Markdown(children=markdown_text),
 
-#         html.H3("Comparing Mean Income, Occupational Prestige, Socioeconomic index, and Years of Education for Men and for Women"),
+        html.H3("Comparing Mean Income, Occupational Prestige, Socioeconomic index, and Years of Education for Men and for Women"),
 
-#         dcc.Graph(figure=table, style={'margin': 30}),
+        dcc.Graph(figure=table, style={'margin': 30}),
 
-#         html.H3("Comparing the Number of Men and Women who Respond with Each Level of Agreement to male_breadwinner"),
+        html.H3("Comparing the Number of Men and Women who Respond with Each Level of Agreement to male_breadwinner"),
 
-#         dcc.Graph(figure=bar),
-#         html.Div([
-#             html.Div([
-#                 html.H3('feature'),
+        dcc.Graph(figure=bar),
+        html.Div([
+            html.Div([
+                html.H3('feature'),
 
-#                 dcc.Dropdown(id='feature',
-#                              options=[{'label': i, 'value': i} for i in [
-#                                  'satjob', 'relationship', 'male_breadwinner', 'men_bettersuited', 'child_suffer', 'men_overwork']],
-#                              value='male_breadwinner'),
+                dcc.Dropdown(id='feature',
+                             options=[{'label': i, 'value': i} for i in [
+                                 'satjob', 'relationship', 'male_breadwinner', 'men_bettersuited', 'child_suffer', 'men_overwork']],
+                             value='male_breadwinner'),
 
-#                 html.H3("group"),
+                html.H3("group"),
 
-#                 dcc.Dropdown(id='group',
-#                              options=[{'label': i, 'value': i}
-#                                       for i in ['sex', 'region', 'education_category']],
-#                              value='sex'),
-#             ], style={'flex': 1}),
-#             html.Div([
+                dcc.Dropdown(id='group',
+                             options=[{'label': i, 'value': i}
+                                      for i in ['sex', 'region', 'education_category']],
+                             value='sex'),
+            ], style={'flex': 1}),
+            html.Div([
 
-#                 dcc.Graph(id="graph")
+                dcc.Graph(id="graph")
 
-#             ], style={'flex': 2}),
-#         ],   style=({"display": 'flex', 'flex-direction': 'row', 'align-items': 'center'})),
-#         html.Div(html.Div(
-#             [html.H2("Comparing Job Prestige and Income by Gender"),
-#              dcc.Graph(figure=scatter)]),
-#             style=({"display": 'flex', 'justify-content': 'center', 'align-items': 'center'})),
-
-
-#         html.Div([
-#             html.Div([
-#                 html.H3("Distribution of Income by Gender"),
-
-#                 dcc.Graph(figure=box1),
-#             ], style={'flex': 1}),
-#             html.Div([
-
-#                 html.H3("Distribution of Occupational Prestige by Gender"),
-
-#                 dcc.Graph(figure=box2),
-
-#             ], style={'flex': 1}),
-#         ],   style=({"display": 'flex', 'flex-direction': 'row', 'align-items': 'center'})),
+            ], style={'flex': 2}),
+        ],   style=({"display": 'flex', 'flex-direction': 'row', 'align-items': 'center'})),
+        html.Div(html.Div(
+            [html.H2("Comparing Job Prestige and Income by Gender"),
+             dcc.Graph(figure=scatter)]),
+            style=({"display": 'flex', 'justify-content': 'center', 'align-items': 'center'})),
 
 
-#         html.H3("Distribution of Income by Occupational Prestige Category "),
+        html.Div([
+            html.Div([
+                html.H3("Distribution of Income by Gender"),
 
-#         dcc.Graph(figure=facbox),
+                dcc.Graph(figure=box1),
+            ], style={'flex': 1}),
+            html.Div([
+
+                html.H3("Distribution of Occupational Prestige by Gender"),
+
+                dcc.Graph(figure=box2),
+
+            ], style={'flex': 1}),
+        ],   style=({"display": 'flex', 'flex-direction': 'row', 'align-items': 'center'})),
 
 
-#     ], style={'color': '#44475a'}
-# )
+        html.H3("Distribution of Income by Occupational Prestige Category "),
+
+        dcc.Graph(figure=facbox),
 
 
-# @app.callback(Output(component_id="graph", component_property="figure"),
-#               [Input(component_id='feature', component_property="value"),
-#                Input(component_id='group', component_property="value")])
-# def make_figure(feature, group):
-#     # Group by sex, male breadwinner, get size, and rename columns
-#     bar_data = gss_clean.groupby([group, feature]).size(
-#     ).reset_index().rename(columns={0: 'count'})
-#     bar_data
-#     # Bar with color sex, change labels to be more easily red
-#     bar = px.bar(bar_data, x=feature, y='count', color=group,
-#                  labels={'feature': f"Response to {feature} Question",
-#                          'count': 'Frequency'},
-#                  barmode='group')
-#     # Add settings
-#     bar.update_layout(showlegend=True)
-#     bar.update(layout=dict(title=dict(x=0.5)))
-#     return bar
+    ], style={'color': '#44475a'}
+)
+
+
+@app.callback(Output(component_id="graph", component_property="figure"),
+              [Input(component_id='feature', component_property="value"),
+               Input(component_id='group', component_property="value")])
+def make_figure(feature, group):
+    # Group by sex, male breadwinner, get size, and rename columns
+    bar_data = gss_clean.groupby([group, feature]).size(
+    ).reset_index().rename(columns={0: 'count'})
+    bar_data
+    # Bar with color sex, change labels to be more easily red
+    bar = px.bar(bar_data, x=feature, y='count', color=group,
+                 labels={'feature': f"Response to {feature} Question",
+                         'count': 'Frequency'},
+                 barmode='group')
+    # Add settings
+    bar.update_layout(showlegend=True)
+    bar.update(layout=dict(title=dict(x=0.5)))
+    return bar
 
 
 # # In[ ]:
 
 
-# if __name__ == '__main__':
-#     app.run_server(debug=True, port=8051, host='0.0.0.0')
-# Create app
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
-
-app.layout = html.Div(
-    [
-        html.H1("Exploring the 2019 American National Election Pilot Study"),
-    ]
-)
-
-
 if __name__ == '__main__':
     app.run_server(debug=True, port=8051, host='0.0.0.0')
+
+# Create app
+# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+# server = app.server
+
+# app.layout = html.Div(
+#     [
+#         html.H1("Exploring the 2019 American National Election Pilot Study"),
+#     ]
+# )
+
+
+# if __name__ == '__main__':
+#     app.run_server(debug=True, port=8051, host='0.0.0.0')
