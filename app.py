@@ -31,7 +31,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 # In[2]:
 
 
-gss = pd.read_csv("https://github.com/taylorrohrich/dash-heroku-template/blob/master/gss2018.csv",
+gss = pd.read_csv("https://raw.githubusercontent.com/taylorrohrich/dash-heroku-template/master/gss2018.csv",
                   encoding='cp1252', na_values=['IAP', 'IAP,DK,NA,uncodeable', 'NOT SURE',
                                                 'DK', 'IAP, DK, NA, uncodeable', '.a', "CAN'T CHOOSE"])
 # Here is code that cleans the data and gets it ready to be used for data visualizations:
