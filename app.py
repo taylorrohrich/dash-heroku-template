@@ -129,7 +129,6 @@ tab = tab.rename(columns={'income': 'income (USD)', 'job_prestige': 'occupationa
                           'socioeconomic_index': 'socioeconomic score', 'education': 'years of education'})
 # Create table
 table = ff.create_table(tab)
-table.show()
 
 
 # ## Problem 3
@@ -155,7 +154,6 @@ bar = px.bar(bar_data, x='male_breadwinner', y='count', color='sex',
 # Add settings
 bar.update_layout(showlegend=True)
 bar.update(layout=dict(title=dict(x=0.5)))
-bar.show()
 
 
 # ## Problem 4
@@ -173,7 +171,6 @@ scatter = px.scatter(gss_clean, x='job_prestige', y='income', color='sex',
                      hover_data=['education', 'socioeconomic_index'],
                      )
 scatter.update(layout=dict(title=dict(x=0.5)))
-scatter.show()
 
 
 # ## Problem 5
@@ -189,7 +186,6 @@ box1 = px.box(gss_clean, y='sex', x='income', color='sex',
 box1.update(layout=dict(title=dict(x=0.5)))
 # Remove legend
 box1.update_layout(showlegend=False)
-box1.show()
 
 
 # In[18]:
@@ -202,7 +198,6 @@ box2 = px.box(gss_clean, y='sex', x='job_prestige', color='sex',
 box2.update(layout=dict(title=dict(x=0.5)))
 # Remove legend
 box2.update_layout(showlegend=False)
-box2.show()
 
 
 # ## Problem 6
@@ -238,7 +233,6 @@ facbox = px.box(facetData, y='sex', x='income', color='sex', facet_col_wrap=2,
                 labels={'job_prestige_cat': "job prestige category"},
                 facet_col='job_prestige_cat',
                 )
-facbox.show()
 
 
 # ## Extra Credit (up to 10 bonus points)
