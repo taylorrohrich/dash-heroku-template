@@ -267,7 +267,7 @@ ALLOWED_TYPES = (
 )
 app.layout = html.Div(
     [
-        html.H1("Exploring the Gender Wage Gap by Job Prestige"),
+        html.H1("Exploring the Gender Wage Gap through GSS Data"),
         html.H2("Taylor Rohrich (trr2as)"),
         html.Div(
             html.Img(src="https://static01.nyt.com/images/2014/11/15/business/money/money-articleLarge.jpg?quality=75&auto=webp&disable=upscale"),
